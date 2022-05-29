@@ -1,6 +1,7 @@
-QT       += core gui
+QT       += core gui opengl openglwidgets serialport
+LIBS += -lOpengl32
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 CONFIG += c++17
 
@@ -9,14 +10,74 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/animation.cpp \
     src/main.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    src/openglwidget.cpp \
+    src/plotwindow.cpp \
+    src/qcustomplot.cpp \
+    src/receiverthread.cpp \
+    src/serialportreader.cpp \
+    src/settingwindow.cpp
 
 HEADERS += \
-    inc/mainwindow.hh
+    inc/animation.hh \
+    inc/animationsettings.hh \
+    inc/mainwindow.hh \
+    inc/memsdata.hh \
+    inc/plotwindow.hh \
+    inc/qcustomplot.h \
+    inc/receiverthread.hh \
+    inc/serialportreader.hh \
+    inc/settingwindow.hh \
+    int/openglwidget.hh
 
 FORMS += \
-    forms/mainwindow.ui
+    forms/mainwindow.ui \
+    forms/plotwindow.ui \
+    forms/settingwindow.ui \
+
+TRANSLATIONS += \
+   translation/WDS_SRSP_en_150.ts
+CONFIG += lrelease
+CONFIG += embed_translations
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    img/led/led_blue.png \
+    img/led/led_green.png \
+    img/led/led_lightGray.png \
+    img/led/led_red.png \
+    img/led/led_yellow-00.png \
+    img/led/led_yellow-01.png \
+    img/led/led_yellow-02.png \
+    img/led/led_yellow-03.png \
+    img/led/led_yellow-04.png \
+    img/led/led_yellow-05.png \
+    img/led/led_yellow-06.png \
+    img/led/led_yellow-07.png \
+    img/led/led_yellow-08.png \
+    img/led/led_yellow-09.png \
+    img/led/led_yellow-10.png \
+    img/led/led_yellow-11.png \
+    img/led/led_yellow.png \
+    translation/WDS_SRSP_en_150.ts
+
+INCLUDEPATH += inc\
+    src\
+    forms\
+    translation
+
+
+
+FORMS += \
+    forms/mainwindow.ui \
+    forms/settingwindow.ui \
+    forms/plotwindow.ui
 
 TRANSLATIONS += \
    translation/WDS_SRSP_en_150.ts
@@ -35,4 +96,7 @@ INCLUDEPATH += inc\
     src\
     forms\
     translation
+
+RESOURCES += \
+    resources.qrc
 
