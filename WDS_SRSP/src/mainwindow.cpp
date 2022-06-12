@@ -13,23 +13,35 @@ MainWindow::MainWindow(QWidget *parent)
     _sWindow = new SettingWindow(_portReader->getSerialSettings(), this);
     _plotWindow = new PlotWindow(this);
     _receiverThread = new ReceiverThread(_portReader);
+    _scene = new Scene(this);
+    setupScene();
 
-    connect(_sWindow, SIGNAL(connectToSerialPort()), _portReader, SLOT(openSerialPort()));
-    connect(_sWindow, SIGNAL(disconectFromSerialPort()), _portReader, SLOT(closeSerialPort()));
+    connect(_sWindow, SIGNAL(connectToSerialPort()),
+            _portReader, SLOT(openSerialPort()));
+    connect(_sWindow, SIGNAL(disconectFromSerialPort()),
+            _portReader, SLOT(closeSerialPort()));
 
     // port opened
-    connect(_portReader, SIGNAL(portOpened()), this, SLOT(on_serial_port_opened()));
-    connect(_portReader, SIGNAL(portOpened()), _receiverThread, SLOT(onPortOpened()));
+    connect(_portReader, SIGNAL(portOpened()),
+            this, SLOT(on_serial_port_opened()));
+    connect(_portReader, SIGNAL(portOpened()),
+            _receiverThread, SLOT(onPortOpened()));
 
     // port closed
-    connect(_portReader, SIGNAL(portClosed()), this, SLOT(on_serial_port_closed()));
+    connect(_portReader, SIGNAL(portClosed()),
+            this, SLOT(on_serial_port_closed()));
 
     // errors
-    connect(_portReader, SIGNAL(portError(QString)), this, SLOT(ErrorHandler(QString)));
-    connect(_receiverThread, SIGNAL(threadError(QString)), this, SLOT(ErrorHandler(QString)));
+    connect(_portReader, SIGNAL(portError(QString)),
+            this, SLOT(ErrorHandler(QString)));
+    connect(_receiverThread, SIGNAL(threadError(QString)),
+            this, SLOT(ErrorHandler(QString)));
 
-    connect(_portReader, SIGNAL(newData(rawData)), _plotWindow, SLOT(new_data_received(rawData)));
-
+    // new data
+    connect(_portReader, SIGNAL(newData(rawData)),
+            _plotWindow, SLOT(new_data_received(rawData)));
+    connect(_portReader, SIGNAL(newData(rawData)),
+            _scene, SLOT(newDataArrived(rawData)));
     ui->speedWidget->hide();
     redLed();
 }
@@ -45,18 +57,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_ResetPushButton_clicked()
 {
+    _scene->resetScene();
+    _scene->stopAnimation();
     emit resetSimulation();
 }
 
 
 void MainWindow::on_StopPushButton_clicked()
 {
+    _scene->stopAnimation();
     emit stopSimulation();
 }
 
 
 void MainWindow::on_StartPushButton_clicked()
 {
+    _scene->startAnimation();
     emit startSimulation();
 }
 
@@ -130,6 +146,18 @@ void MainWindow::greenLed()
 void MainWindow::redLed()
 {
     ui->led->setPixmap(QPixmap(":/img/img/led/led_red.png"));
+}
+
+void MainWindow::setupScene()
+{
+    //_scene->setSceneRect(0,0, 739, 480);
+    _scene->setBackgroundBrush(QBrush(QRgb(0xFFDFD3)));
+    _scene->addRoad();
+    _scene->addCar();
+
+    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView->setScene(_scene);
 
 }
 

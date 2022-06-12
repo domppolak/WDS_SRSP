@@ -10,26 +10,30 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/animation.cpp \
+    src/car_item.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
-    src/openglwidget.cpp \
     src/plotwindow.cpp \
     src/qcustomplot.cpp \
     src/receiverthread.cpp \
+    src/road_item.cpp \
+    src/scene.cpp \
     src/serialportreader.cpp \
-    src/settingwindow.cpp
+    src/settingwindow.cpp \
+    src/tree_item.cpp
 
 HEADERS += \
-    inc/animation.hh \
-    inc/animationsettings.hh \
+    inc/car_item.hh \
     inc/mainwindow.hh \
     inc/memsdata.hh \
     inc/plotwindow.hh \
     inc/qcustomplot.h \
     inc/receiverthread.hh \
+    inc/road_item.hh \
+    inc/scene.hh \
     inc/serialportreader.hh \
     inc/settingwindow.hh \
+    inc/tree_item.hh \
     int/openglwidget.hh
 
 FORMS += \

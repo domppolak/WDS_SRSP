@@ -8,7 +8,7 @@
 #include "serialportreader.hh"
 #include "plotwindow.hh"
 #include "receiverthread.hh"
-
+#include "scene.hh"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -61,7 +61,11 @@ private:
     SerialPortReader *_portReader;
     PlotWindow *_plotWindow;
     ReceiverThread *_receiverThread;
+    Scene *_scene;
 
+    void setupScene();
+
+    //ObjectWidget *_sceneWidget;
     QSettings *setting;
 };
 #endif // MAINWINDOW_H

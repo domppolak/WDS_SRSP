@@ -31,6 +31,7 @@ void SerialPortReader::readData()
 
         if(errorRead == 10){
             emit portError(QStringLiteral("Błąd odczytu danych"));
+            closeSerialPort();
             break;
         }
 
