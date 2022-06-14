@@ -5,12 +5,14 @@ Scene::Scene(QObject *parent)
     : QGraphicsScene(parent)
 {
     srand(time(NULL));
-
+    _constSpeed = false;
+    _simulationON = false;
 }
 
 Scene::~Scene()
 {
-
+    delete _road;
+    delete _mainCar;
 }
 
 void Scene::addCar()
@@ -23,48 +25,74 @@ void Scene::addCar()
 
 void Scene::addRoad()
 {
-    _road = new RoadItem(100, 0);
+    _road = new RoadItem;
     addItem(_road);
+    connect(this, SIGNAL(startRoad()), _road, SLOT(startAnimation()));
+    connect(this, SIGNAL(stopRoad()), _road, SLOT(stopAnimation()));
 }
 
 
 void Scene::newDataArrived(rawData data)
 {
-    moveData move;
-    move.X = data.X/100;
-    move.Y = data.Y/100;
-    _mainCar->move(move);
+    if(_simulationON){
+        moveData move;
+        move.X = data.X/100;
+        move.Y = data.Y;
+        _mainCar->move(move);
+        if(!_constSpeed){
+            _road->speedChanged(move);
+        }
+    }
 }
 
-void Scene::startTimer()
+void Scene::startSimulation()
 {
-
-}
-
-void Scene::stopTimer()
-{
-
-}
-
-void Scene::startAnimation()
-{
-    _road->startAnimation();
+    _simulationON = true;
     emit moveCar();
+    emit startRoad();
 }
 
-void Scene::stopAnimation()
+void Scene::stopSimulation()
 {
-    _road->stopRoad();
+    _simulationON = false;
     emit stopCar();
+    emit stopRoad();
 }
 
-void Scene::resetScene()
+void Scene::resetSimulation()
 {
+    _simulationON = false;
     removeItem(_road);
     removeItem(_mainCar);
     delete _road;
     delete _mainCar;
     addRoad();
     addCar();
+}
+
+void Scene::onConstSpeed()
+{
+    this->_constSpeed = true;
+}
+
+void Scene::onVariableSpeed()
+{
+    this->_constSpeed = false;
+}
+
+void Scene::setCarSpeed(const int &speed)
+{
+    qDebug() << "Test " << speed;
+    _road->setSpeed(speed);
+}
+
+int Scene::getCarSpeed() const
+{
+    return _road->getSpeed();
+}
+
+bool Scene::getConstSpeedState() const
+{
+    return this->_constSpeed;
 }
 

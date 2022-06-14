@@ -28,6 +28,11 @@ void SettingWindow::update()
     fillSerialPortParameters();
 }
 
+void SettingWindow::retranslate()
+{
+    _ui->retranslateUi(this);
+}
+
 void SettingWindow::on_serialPortComboBox_currentIndexChanged(int index)
 {
     showPortInfo(index);
@@ -139,7 +144,7 @@ void SettingWindow::fillStopBitsParameters()
     _ui->stopBitsComboBox->addItem(QStringLiteral("2"), QSerialPort::TwoStop);
 }
 
-void SettingWindow::setCurrentIndexes()
+void SettingWindow::setDefaultIndexes()
 {
     _ui->baudRateComboBox->setCurrentIndex(_serialSettings->value("serial/indexBaudRate", 3).toInt()); // 9600
     _ui->wordLengthComboBox->setCurrentIndex(_serialSettings->value("serial/indexWordLength", 3).toInt()); // 8 bits
@@ -154,7 +159,7 @@ void SettingWindow::fillSerialPortParameters()
     fillParityParameters();
     fillStopBitsParameters();
 
-    setCurrentIndexes();
+    setDefaultIndexes();
 }
 
 void SettingWindow::showPortInfo(int index)

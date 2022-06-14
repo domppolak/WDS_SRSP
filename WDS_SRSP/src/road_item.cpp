@@ -1,44 +1,66 @@
 #include "road_item.hh"
 
-RoadItem::RoadItem(qreal newX, qreal newY)
+
+RoadItem::RoadItem()
 {
+    _speed = MIN_SPEED;
     setPixmap(QPixmap(":/road/img/road/road5.png"));
-    setPos(newX, newY);
-    setFlag(QGraphicsItem :: ItemStacksBehindParent);
-    //setFocus();
-    yAnimation = new QPropertyAnimation(this, "y", this);
-    yAnimation->setStartValue(-1000);
-    yAnimation->setEndValue(1000);
-    yAnimation->setEasingCurve(QEasingCurve::Linear);
-    yAnimation->setDuration(2000);
-    yAnimation->setLoopCount(-1);
-
+    setPos(100, -600);
+    setFlag(QGraphicsItem :: ItemIsFocusable);
+    setFocus();
+    isVisible();
+    _timer = new QTimer();
+    connect(_timer, SIGNAL(timeout()), this, SLOT(move()));
 }
 
-qreal RoadItem::y() const
+RoadItem::~RoadItem()
 {
-    return m_y;
+    delete _timer;
 }
 
-void RoadItem::setY(qreal _y)
+
+void RoadItem::setSpeed(const int &speed)
 {
-    this->m_y = _y;
-    setPos(QPointF(x(), y()) + QPointF(0, _y));
-}
-
-void RoadItem::setRestartPos(){
-    if(yAnimation->endValue() == 500){
-         setPos(100, 0);
+    int tmp = speed;
+    if(speed > MAX_SPEED){
+        tmp = MAX_SPEED;
     }
-
+    if(speed < MIN_SPEED){
+        tmp = MIN_SPEED;
+    }
+    this->_speed = tmp;
 }
-void RoadItem::stopRoad()
+
+int RoadItem::getSpeed() const
 {
-    yAnimation->stop();
+    return this->_speed;
+}
+
+void RoadItem::move()
+{
+    setPos(x(), y()+_speed);
+    if(y() > -250){
+        setPos(x(), -600);
+    }
 }
 
 void RoadItem::startAnimation()
 {
-    yAnimation->start();
+    _timer->start(25);
 }
 
+void RoadItem::stopAnimation()
+{
+    _timer->stop();
+}
+
+void RoadItem::speedChanged(moveData data)
+{
+    qDebug() << "Predkosc zmieniona: " << getSpeed();
+    if( data.Y < -350){
+        setSpeed(getSpeed() - 1);
+    }
+    if(data.Y > 350){
+        setSpeed(getSpeed() + 1);
+    }
+}

@@ -109,15 +109,21 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="label_6">
-          <property name="maximumSize">
+          <property name="minimumSize">
            <size>
             <width>50</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>70</width>
             <height>16777215</height>
            </size>
           </property>
           <property name="baseSize">
            <size>
-            <width>50</width>
+            <width>70</width>
             <height>100</height>
            </size>
           </property>

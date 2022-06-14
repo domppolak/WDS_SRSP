@@ -68,8 +68,7 @@ DISTFILES += \
     img/led/led_yellow-09.png \
     img/led/led_yellow-10.png \
     img/led/led_yellow-11.png \
-    img/led/led_yellow.png \
-    translation/WDS_SRSP_en_150.ts
+    img/led/led_yellow.png
 
 INCLUDEPATH += inc\
     src\
@@ -83,18 +82,13 @@ FORMS += \
     forms/settingwindow.ui \
     forms/plotwindow.ui
 
-TRANSLATIONS += \
-   translation/WDS_SRSP_en_150.ts
-CONFIG += lrelease
-CONFIG += embed_translations
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    translation/WDS_SRSP_en_150.ts
+DISTFILES +=
 
 INCLUDEPATH += inc\
     src\

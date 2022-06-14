@@ -20,6 +20,11 @@ PlotWindow::~PlotWindow()
     delete ui;
 }
 
+void PlotWindow::retranslate()
+{
+    ui->retranslateUi(this);
+}
+
 void PlotWindow::new_data_received(rawData data)
 {
     _time += static_cast<double>(10)/1000;
@@ -53,11 +58,11 @@ void PlotWindow::MakePlot()
     ui->customPlot->graph(2)->setName("Z");
 
     ui->customPlot->yAxis->setRange(-2000, 2000);
-    ui->customPlot->yAxis->setLabel("Przyspieszenie [mg]");
+    ui->customPlot->yAxis->setLabel(tr("Przyspieszenie [mg]"));
 
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->customPlot->xAxis->setTicker(timeTicker);
     ui->customPlot->axisRect()->setupFullAxesBox();
-    ui->customPlot->xAxis->setLabel("Czas [hh:mm:ss]");
+    ui->customPlot->xAxis->setLabel(tr("Czas [hh:mm:ss]"));
 }

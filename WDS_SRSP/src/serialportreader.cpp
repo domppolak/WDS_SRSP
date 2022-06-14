@@ -30,7 +30,7 @@ void SerialPortReader::readData()
         }
 
         if(errorRead == 10){
-            emit portError(QStringLiteral("Błąd odczytu danych"));
+            emit portError(tr("Błąd odczytu danych"));
             closeSerialPort();
             break;
         }
@@ -48,17 +48,16 @@ void SerialPortReader::openSerialPort()
     _serialPort->setStopBits(static_cast<QSerialPort::StopBits>(_serialSettings->value("serial/stopBits").toInt()));
     _serialPort->setFlowControl(QSerialPort::NoFlowControl);
 
-    qDebug() << _serialSettings->value("serial/name").toString();
     if(_serialPort->open(QSerialPort::ReadOnly)){
         _portOpened = true;
         qDebug() << "Port otwarty";
         emit portOpened();
     }else{
         if(_serialPort->isOpen() && _portOpened){
-            emit portError(QStringLiteral("Port otwarty"));
+            emit portError(tr("Port otwarty"));
         }else{
             _portOpened = false;
-            emit portError(QStringLiteral("Nie udalo sie polaczyc z mikrokontrolerem"));
+            emit portError(tr("Nie udalo sie polaczyc z mikrokontrolerem"));
         }
     }
 }

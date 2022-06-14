@@ -10,6 +10,8 @@
 #include "receiverthread.hh"
 #include "scene.hh"
 
+enum Language{pl_PL, en_EN};
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -23,9 +25,6 @@ public:
     ~MainWindow();
 
 signals:
-    void startSimulation();
-    void stopSimulation();
-    void resetSimulation();
     void obstacleON();
     void obstacleOFF();
     void constSpeed();
@@ -46,6 +45,8 @@ private slots:
     void on_connectAction_triggered();
     void on_disconnectAction_triggered();
     void on_settingAction_triggered();
+    void on_polishAction_triggered();
+    void on_englishAction_triggered();
 
     void on_serial_port_opened();
     void on_serial_port_closed();
@@ -54,7 +55,16 @@ private slots:
     void greenLed();
     void redLed();
 
+    void on_SpeedSpinBox_valueChanged(int arg1);
+
+
+
 private:
+    void setupScene();
+    void setConnections();
+    void setupSpeedSpinBox();
+    int changeLanguage(Language lang);
+    void retranslate();
 
     Ui::MainWindow *ui;
     SettingWindow *_sWindow;
@@ -62,10 +72,7 @@ private:
     PlotWindow *_plotWindow;
     ReceiverThread *_receiverThread;
     Scene *_scene;
-
-    void setupScene();
-
-    //ObjectWidget *_sceneWidget;
-    QSettings *setting;
+    //QTranslator *engTranslate;
+    QTranslator *_translator;
 };
 #endif // MAINWINDOW_H

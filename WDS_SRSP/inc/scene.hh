@@ -18,31 +18,34 @@ public:
 
     void addCar();
     void addRoad();
-    void startSimulation();
-    void startAnimation();
-    void stopAnimation();
-    void resetScene();
-
+    void setCarSpeed(const int &speed);
+    int getCarSpeed() const;
+    bool getConstSpeedState() const;
+    bool getSimulationState() const;
+    void setSimulationState(const bool &state);
 signals:
     void moveCar();
     void stopCar();
+    void stopRoad();
+    void startRoad();
+    void carSpeedChanged(moveData data);
 
 private slots:
     void newDataArrived(rawData data);
 
+public slots:
+    void startSimulation();
+    void stopSimulation();
+    void resetSimulation();
+    void onConstSpeed();
+    void onVariableSpeed();
+
 private:
-
-    QTimer *_timer;
-    QTimer *_carTimer;
-
     bool _simulationON;
+    bool _constSpeed;
+
     CarItem *_mainCar;
     RoadItem *_road;
-    RoadItem *_road1;
-
-    void startTimer();
-    void stopTimer();
-    void freeze();
 };
 
 #endif // SCENE_HH

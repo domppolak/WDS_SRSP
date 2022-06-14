@@ -372,7 +372,15 @@
     <addaction name="disconnectAction"/>
     <addaction name="settingAction"/>
    </widget>
+   <widget class="QMenu" name="languageMenuBar">
+    <property name="title">
+     <string>Język</string>
+    </property>
+    <addaction name="polishAction"/>
+    <addaction name="englishAction"/>
+   </widget>
    <addaction name="connectMenuBar"/>
+   <addaction name="languageMenuBar"/>
   </widget>
   <action name="connectAction">
    <property name="text">
@@ -387,6 +395,16 @@
   <action name="settingAction">
    <property name="text">
     <string>Ustawienia</string>
+   </property>
+  </action>
+  <action name="polishAction">
+   <property name="text">
+    <string>Polski</string>
+   </property>
+  </action>
+  <action name="englishAction">
+   <property name="text">
+    <string>Angielski</string>
    </property>
   </action>
  </widget>

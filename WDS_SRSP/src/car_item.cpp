@@ -5,7 +5,7 @@
 
 CarItem::CarItem()
 {
-    _stopCar = false;
+    _stopCar = true;
     setPixmap(QPixmap(":/car/img/models/car.png"));
     setScale(0.3);
     resetPosition();
@@ -17,6 +17,7 @@ void CarItem::resetPosition()
     setPos(235, 300);
     setFlag(QGraphicsItem :: ItemIsFocusable);
     setFocus();
+    isVisible();
 }
 
 void CarItem::move(moveData data)
@@ -31,7 +32,6 @@ void CarItem::move(moveData data)
         if((pos().x() + 150 + data.X) >= 740){
             setPos(740-155, y());
         }
-        qDebug() << "Car move";
     }
 }
 

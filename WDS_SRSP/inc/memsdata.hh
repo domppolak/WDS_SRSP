@@ -5,7 +5,7 @@
 
 /*!
  * \brief Struktura rawData
- * Struktura zawiera dane otrzymane z mikrokontrolera
+ * Struktura przechowuje dane otrzymane z mikrokontrolera
  *
  */
 

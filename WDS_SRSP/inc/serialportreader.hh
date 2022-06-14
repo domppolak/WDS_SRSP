@@ -22,7 +22,7 @@ public:
     /*!
      * \brief SerialPortReader
      * Konstruktor klasy
-     * \param [in] parent - rodzic obiektu
+     * \param parent - rodzic obiektu
      */
     explicit SerialPortReader(QObject *parent = nullptr);
     /*!
@@ -45,7 +45,7 @@ public:
     /*!
      * \brief setPortOpened
      * Ustawia flagę na wartość przekazaną w argumencie funkcji
-     * \param [in] state - wartość do ustawienia flagi otwarcia portu
+     * \param state - wartość do ustawienia flagi otwarcia portu
      */
     void setPortOpened(const bool &state) {this->_portOpened = state; }
 
@@ -60,7 +60,7 @@ signals:
     /*!
      * \brief newData
      * Sygnał emitowany w momencie otrzymania nowych danych z mikrokontrolera
-     * \param [in] Data - W parametrze przechowywane są dane otrzymane z mikrokontrolera
+     * \param Data - W parametrze przechowywane są dane otrzymane z mikrokontrolera
      */
     void newData(rawData Data);
     /*!
@@ -76,7 +76,7 @@ signals:
     /*!
      * \brief portError
      * Sygnał emitowany gdy następi błąd z komunikacją
-     * \param [in ]errorMessage - informacja o błędzie
+     * \param errorMessage - informacja o błędzie
      */
     void portError(QString errorMessage);
     /*!
@@ -112,12 +112,12 @@ public slots:
      * \brief serialErrorHandler
      * Obsługuje błędy zgłaszane przez port szeregowy
      *  i emituje je poprzez sygnał portError()
-     * \param [in] errorMessage - błąd zgłoszony przez port szeregowy
+     * \param errorMessage - błąd zgłoszony przez port szeregowy
      */
     void serialErrorHandler(QSerialPort::SerialPortError errorMessage);
 
 private:
-    QSerialPort *_serialPort = nullptr; //! Uchwyt portu szeregowego
+    QSerialPort *_serialPort = nullptr; //! Wskaźnik na port szeregowy
     QSettings *_serialSettings; //! Wskaźnik do ustawień portu szeregowego
     QMutex _mutex; //! Wskaźnik na mutex
 

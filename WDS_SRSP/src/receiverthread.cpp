@@ -10,7 +10,7 @@ ReceiverThread::ReceiverThread(SerialPortReader *reader)
 void ReceiverThread::run()
 {
     if(!_portReader->getPortOpened()){
-        emit threadError(QStringLiteral("Błąd odczytu danych"));
+        emit threadError(tr("Błąd odczytu danych"));
         _terminate();
         return;
     }

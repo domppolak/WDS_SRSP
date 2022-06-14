@@ -37,6 +37,11 @@ public:
      * szeregowego wybrane przez użytkoniwka
      */
     void update();
+    /*!
+     * \brief retranslate
+     * Funckja wywołująca ponowne tłumaczenie okna
+     */
+    void retranslate();
 
 signals:
     /*!
@@ -55,7 +60,7 @@ private slots:
      * \brief on_serialPortComboBox_currentIndexChanged
      * Slot obsłgujący zmianę w obiekcie serialPortComboBox, pozwala na wybranie
      * portu szeregowego, a następnie wyświetla informacje o wybranym porcie.
-     * \param [out] index - indeks aktualnie wybranego pola
+     * \param index - indeks aktualnie wybranego pola
      */
     void on_serialPortComboBox_currentIndexChanged(int index);
     /*!
@@ -129,11 +134,11 @@ private:
      */
     void showPortInfo(int index);
     /*!
-     * \brief setCurrentIndexes
+     * \brief setDefaultIndexes
      * Funckja odpowiedzialna za ustawienie domyślnych ustawień portu szeregowego
      * w _serialSettings.
      */
-    void setCurrentIndexes();
+    void setDefaultIndexes();
 
     Ui::SettingWindow *_ui; //! Interfejs okna
     QSettings *_serialSettings; //! ustawienia portu szeregowego

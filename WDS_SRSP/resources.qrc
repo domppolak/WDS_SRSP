@@ -19,4 +19,8 @@
         <file>img/road/road3.png</file>
         <file>img/road/road5.png</file>
     </qresource>
+    <qresource prefix="/translate"/>
+    <qresource prefix="/translation">
+        <file>translation/WDS_SRSP_en_150.qm</file>
+    </qresource>
 </RCC>

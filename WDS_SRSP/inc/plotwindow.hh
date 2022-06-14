@@ -22,7 +22,7 @@ public:
     /*!
      * \brief PlotWindow
      * Konstruktor klasy
-     * \param [in] parent - rodzic obiektu
+     * \param parent - rodzic obiektu
      */
     explicit PlotWindow(QWidget *parent = nullptr);
     /*!
@@ -30,11 +30,16 @@ public:
      * Destruktor klasy
      */
     ~PlotWindow();
+    /*!
+     * \brief retranslate
+     * Funkcja wywołująca ponowne tłumaczenie okna
+     */
+    void retranslate();
 
 private slots:
     /*!
      * \brief new_data_received
-     * Słot obsługujący nowootrzymane dane. Opowiada za doanie danych do wykresów.
+     * Słot obsługujący nowootrzymane dane. Opowiada za dodanie danych do wykresów.
      * \param data
      */
     void new_data_received(rawData data);
