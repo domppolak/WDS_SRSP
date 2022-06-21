@@ -22,7 +22,7 @@ public:
     /*!
      * \brief PlotWindow
      * Konstruktor klasy
-     * \param parent - rodzic obiektu
+     * \param[in] parent - rodzic obiektu
      */
     explicit PlotWindow(QWidget *parent = nullptr);
     /*!
@@ -32,28 +32,28 @@ public:
     ~PlotWindow();
     /*!
      * \brief retranslate
-     * Funkcja wywołująca ponowne tłumaczenie okna
+     * Funkcja wywołująca ponowne przetłumaczenie okna
      */
     void retranslate();
 
 private slots:
     /*!
      * \brief new_data_received
-     * Słot obsługujący nowootrzymane dane. Opowiada za dodanie danych do wykresów.
-     * \param data
+     * Słot obsługujący nowootrzymane dane, odpowiada za dodanie danych do wykresów
+     * \param[in] data - dane otrzymane z mikrokontrolera
      */
     void new_data_received(rawData data);
 
 private:
     /*!
      * \brief MakePlot
-     * Funckja ustawia własności i wygląd wykresów
+     * Funkcja ustawia własności i wygląd wykresów
      *(tytuł, liczbę grafów, zakresy, interakcje z użytkownikiem).
      */
     void MakePlot();
 
-    Ui::PlotWindow *ui; //!Interfejs okna
-    double _time; //! Czas pomiaru
+    Ui::PlotWindow *ui; //!< Interfejs okna
+    double _time; //!< Czas pomiaru
 };
 
 #endif // PLOTWINDOW_HH

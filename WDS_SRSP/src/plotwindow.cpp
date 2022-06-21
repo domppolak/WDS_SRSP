@@ -43,7 +43,7 @@ void PlotWindow::MakePlot()
     ui->customPlot->setInteraction(QCP::iRangeZoom);
 
     ui->customPlot->plotLayout()->insertRow(0);
-    ui->customPlot->plotLayout()->addElement(( new QCPTextElement(ui->customPlot, QStringLiteral("Osie akcelerometru"), QFont("sans", 12, QFont::Bold))));
+    ui->customPlot->plotLayout()->addElement(( new QCPTextElement(ui->customPlot, tr("Osie akcelerometru"), QFont("sans", 12, QFont::Bold))));
 
     ui->customPlot->addGraph();
     ui->customPlot->graph(0)->setPen(QPen(QColor("blue")));

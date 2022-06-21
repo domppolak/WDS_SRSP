@@ -13,19 +13,20 @@ SOURCES += \
     src/car_item.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
+    src/obstacleCar.cpp \
     src/plotwindow.cpp \
     src/qcustomplot.cpp \
     src/receiverthread.cpp \
     src/road_item.cpp \
     src/scene.cpp \
     src/serialportreader.cpp \
-    src/settingwindow.cpp \
-    src/tree_item.cpp
+    src/settingwindow.cpp
 
 HEADERS += \
     inc/car_item.hh \
     inc/mainwindow.hh \
     inc/memsdata.hh \
+    inc/obstacleCar.hh \
     inc/plotwindow.hh \
     inc/qcustomplot.h \
     inc/receiverthread.hh \
@@ -33,7 +34,6 @@ HEADERS += \
     inc/scene.hh \
     inc/serialportreader.hh \
     inc/settingwindow.hh \
-    inc/tree_item.hh \
     int/openglwidget.hh
 
 FORMS += \

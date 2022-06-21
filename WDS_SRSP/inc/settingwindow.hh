@@ -21,8 +21,9 @@ class SettingWindow : public QDialog
 public:
     /*!
      * \brief SettingWindow
-     * \param [in] serial_settings - wskaźnik do ustawień portu szeregowego
-     * \param [in] parent - rodzic obiektu
+     * Konstruktor klasy
+     * \param[in] serial_settings - wskaźnik do ustawień portu szeregowego
+     * \param[in] parent - rodzic obiektu
      */
     explicit SettingWindow(QSettings *serial_settings, QWidget *parent = nullptr);
 
@@ -39,14 +40,14 @@ public:
     void update();
     /*!
      * \brief retranslate
-     * Funckja wywołująca ponowne tłumaczenie okna
+     * Funkcja wywołująca ponowne przetłumaczenie okna
      */
     void retranslate();
 
 signals:
     /*!
      * \brief connectToSerialPort
-     * Sygnał emitowany w momencie wybrania połączenia z mikrokontrolera
+     * Sygnał emitowany w momencie wybrania połączenia z mikrokontrolerem
      */
     void connectToSerialPort();
     /*!
@@ -87,12 +88,12 @@ private slots:
 private:
     /*!
      * \brief updateSerialSettings
-     * Funckja aktualizująca ustawienia port szeregowego w _serialSettings.
+     * Funkcja aktualizująca ustawienia port szeregowego w _serialSettings.
      */
     void updateSerialSettings();
     /*!
      * \brief fillSerialPortsInfo
-     * Funckja wypełania ComboBoxa (obiekt serialPortComboBox) dostępnymi portami
+     * Funkcja wypełania ComboBoxa (obiekt serialPortComboBox) dostępnymi portami
      * oraz wypisuje najważniejsze informacje o porcie.
      */
     void fillSerialPortsInfo();
@@ -105,43 +106,43 @@ private:
     void fillSerialPortParameters();
     /*!
      * \brief fillBaudRateParameters
-     * Funckja wypełnia ComboBoxa (obiekt baudRateComboBox) możliwymi parametrami
+     * Funkcja wypełnia ComboBoxa (obiekt baudRateComboBox) możliwymi parametrami
      * odpowiedzialnymi za ustawienie prędkości transmisji.
      */
     void fillBaudRateParameters();
     /*!
      * \brief fillWordLengthParameters
-     * Funckja wypełnia ComboBoxa (obiekt wordLengthComboBox) możliwymi parametrami
+     * Funkcja wypełnia ComboBoxa (obiekt wordLengthComboBox) możliwymi parametrami
      * odpowiedzialnymi za ustawienie długości wysyłanego słowa.
      */
     void fillWordLengthParameters();
     /*!
      * \brief fillParityParameters
-     * Funckja wypełnia ComboBoxa (obiekt parityComboBox) możliwymi parametrami
+     * Funkcja wypełnia ComboBoxa (obiekt parityComboBox) możliwymi parametrami
      * odpowiedzialnymi za parzystość.
      */
     void fillParityParameters();
     /*!
      * \brief fillStopBitsParameters
-     * Funckja wypełnia ComboBoxa (obiekt stopBitsComboBox) możliwymi parametrami
+     * Funkcja wypełnia ComboBoxa (obiekt stopBitsComboBox) możliwymi parametrami
      * odpowiedzialnymi za ustawienie bitu stopu.
      */
     void fillStopBitsParameters();
     /*!
      * \brief showPortInfo
-     * Funckja odpowiedzialna za wyświetlenie aktulanych informacji o portcie.
+     * Funkcja odpowiedzialna za wyświetlenie aktulanych informacji o portcie.
      * \param [in] index - indeks wybranego portu szeregowego
      */
     void showPortInfo(int index);
     /*!
      * \brief setDefaultIndexes
-     * Funckja odpowiedzialna za ustawienie domyślnych ustawień portu szeregowego
+     * Funkcja odpowiedzialna za ustawienie domyślnych ustawień portu szeregowego
      * w _serialSettings.
      */
     void setDefaultIndexes();
 
-    Ui::SettingWindow *_ui; //! Interfejs okna
-    QSettings *_serialSettings; //! ustawienia portu szeregowego
+    Ui::SettingWindow *_ui; //!< Interfejs okna
+    QSettings *_serialSettings; //!< Wskaźnik na obiekt klasy QSettings
 
 
 };

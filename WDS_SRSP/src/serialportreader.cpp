@@ -79,7 +79,7 @@ int SerialPortReader::readDataFromSerial()
     QTextStream stream(_serialPort->readAll());
     stream >> msgBegin;
     if(!_serialPort->waitForReadyRead(500) &&  msgBegin != "!!"){
-        return false;
+        return 0;
     }
 
     stream >> data.X >> data.Y >> data.Z >> sumReaded >> msgEnd;
@@ -88,10 +88,10 @@ int SerialPortReader::readDataFromSerial()
         if(sumComputed == sumReaded){
             qDebug() << data.X << " " << data.Y << " " << data.Z;
             emit newData(data);
-            return true;
+            return 1;
         }
     }
-    return false;
+    return 0;
 }
 
 void SerialPortReader::serialErrorHandler(QSerialPort::SerialPortError errorMessage)

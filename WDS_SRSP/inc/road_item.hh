@@ -12,7 +12,7 @@
 
 /*!
  * \brief The RoadItem class
- * Klasa obsługująca animację drogi, ustawienie prędkości animacji przesowania drogi.
+ * Klasa obsługująca animację obiektu drogi.
  */
 class RoadItem : public QObject, public QGraphicsPixmapItem
 {
@@ -22,8 +22,9 @@ public:
     /*!
      * \brief RoadItem
      * Konstruktor klasy
+     * \param[in] w - szerokość sceny
      */
-    RoadItem();
+    RoadItem(const int &w);
     /*!
      * \brief ~RoadItem
      * Destruktor klasy
@@ -31,8 +32,8 @@ public:
     ~RoadItem();
     /*!
      * \brief setSpeed
-     * Funckja odpowiedzialna zaustawienie szybkości animacji drogi
-     * \param speed - szybkość animacji
+     * Funkcja odpowiedzialna za ustawienie szybkości animacji drogi
+     * \param[in] speed - szybkość animacji
      */
     void setSpeed(const int &speed);
     /*!
@@ -42,34 +43,40 @@ public:
     int getSpeed() const;
     /*!
      * \brief speedChanged
-     * Funckja odpowiedzialna za dynamiczną zmianę prędkości animacji,
+     * Funkcja odpowiedzialna za dynamiczną zmianę prędkości animacji,
      * w zależności od odczytów z mikrokontrolera
-     * \param data - w parametrze przechowywane dane odpowiedzialne za poruszanie odczytane z mikrokontrolera
+     * \param[in] data - w parametrze przechowywane dane odpowiedzialne za poruszanie odczytane z mikrokontrolera
      */
     void speedChanged(moveData data);
-
+    /*!
+     * \brief resize
+     * Funkcja realizująca zmianę wielkości obiektu
+     * \param[in] w - szerokość okna symulacji
+     */
+    void resize(const int &w);
 public slots:
     /*!
      * \brief move
-     * Slot odpowiedzialny za ustawienie nowej pozycji animacji drogi
+     * Slot odpowiedzialny za ustawienie nowej pozycji drogi
      */
     void move();
     /*!
      * \brief startAnimation
-     * Slot uruchamiający animację drogi
+     * Slot odpowiedzialny za uruchomienie animacji drogi
      */
     void startAnimation();
     /*!
      * \brief stopAnimation
-     * Slot zatrzymujący animację drogi
+     * Slot odpowiedzialny za zatrzymanie animacji drogi
      */
     void stopAnimation();
 
 
 private:
-    int _speed; //! Prędkość animacji drogi
-    QTimer *_timer; //! Wskaźnik na timer
+    int _speed; //!< Prędkość animacji drogi
+    QTimer *_timer; //!< Wskaźnik na obiekt klasy QTimer
 
+    QPixmap _pixmap; //!< Obiekt przechowujący wczytany obraz
 };
 
 #endif // ROAD_ITEM_HH

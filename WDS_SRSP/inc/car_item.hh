@@ -3,14 +3,13 @@
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
-#include <QPropertyAnimation>
 #include <QGraphicsScene>
 #include "memsdata.hh"
 
 /*!
  * \brief The CarItem class
  * Klasa odpowiedzialna za zarządzanie obiektem samochodu,
- * poruszanie samochodu w prawo lub lewo na podstaie odczytanych danych z mikrokontrolera
+ * poruszaniem samochodu w prawo lub lewo na podstawie odczytanych danych z mikrokontrolera.
  */
 class CarItem : public QObject, public QGraphicsPixmapItem
 {
@@ -19,25 +18,43 @@ public:
     /*!
      * \brief CarItem
      * Konstruktor klasy
+     *\param[in] w - szerekość okna
+     *\param[in] h - wysokość okna
+     *\param[in] parent - rodzic obiektu
      */
-    CarItem();
+    explicit CarItem(const int &w, const int &h, QObject *parent = nullptr);
 
     /*!
      * \brief resetPosition
-     * Funckja odpowiedzilana za ustawienie początkowej pozycji samochodu
+     * Funkcja odpowiedzialna za ustawienie początkowej pozycji samochodu
      */
     void resetPosition();
     /*!
      * \brief move
-     * Klasa odpowiedzialna za ustawienie nowej pozycji samochodu
-     * \param data - w parametrze przechowywane dane odpowiedzialne za poruszanie odczytane z mikrokontrolera
+     * Funkcja odpowiedzialna za ustawienie nowej pozycji samochodu
+     * \param [in] data - w parametrze przekazywane dane odpowiedzialne za przesunięcie samochod(odczytane z mikrokontrolera)
      */
     void move(moveData data);
+
+    /*!
+     * \brief resize
+     * Funkcja realizuje zmianę rozmiaru samochodu
+     * \param[in] w - szerekość okna
+     * \param[in] h - wysokość okna
+     */
+    void resize(const int &w, const int &h);
+
+signals:
+    /*!
+     * \brief crashCar
+     * Sygnał wysyłany w momencie zderzenia samochodu z przeszkodą
+     */
+    void crashCar();
 
 public slots:
     /*!
      * \brief onMoveCar
-     * Slot odpowiedzlany za poruszanie samochodu
+     * Slot odpowiedzlany za poruszanie samochodem
      */
     void onMoveCar();
     /*!
@@ -47,7 +64,11 @@ public slots:
     void onStopCar();
 
 private:
-    bool _stopCar; //! Flaga sygnalizująca zatrzymanie ruchu samochodu
+    bool _stopCar; //!< Flaga sygnalizująca zatrzymanie ruchu samochodu
+
+    int _w; //!< Szerokość okna
+    int _h; //!< Wysokość okna
+    QPixmap _pixmap; //!< Przechowuje wczytany obraz
 };
 
 #endif // CAR_ITEM_HH

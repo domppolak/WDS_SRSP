@@ -58,7 +58,14 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
-        <widget class="QGraphicsView" name="graphicsView"/>
+        <widget class="QGraphicsView" name="graphicsView">
+         <property name="minimumSize">
+          <size>
+           <width>750</width>
+           <height>490</height>
+          </size>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

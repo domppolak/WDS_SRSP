@@ -3,37 +3,66 @@
 #include <QRandomGenerator>
 #include <QDebug>
 
-CarItem::CarItem()
+CarItem::CarItem(const int &w, const int &h, QObject *parent)
+    : QObject(parent)
 {
     _stopCar = true;
-    setPixmap(QPixmap(":/car/img/models/car.png"));
-    setScale(0.3);
-    resetPosition();
-    qDebug() << "Car created";
+    _pixmap = QPixmap(":/car/img/models/car.png");
+    setPixmap(_pixmap);
+    setFlag(QGraphicsItem :: ItemIsFocusable);
+    setFocus();
+    isVisible();
+    resize(w, h);
 }
 
 void CarItem::resetPosition()
 {
     setPos(235, 300);
-    setFlag(QGraphicsItem :: ItemIsFocusable);
-    setFocus();
-    isVisible();
 }
 
 void CarItem::move(moveData data)
 {
+    int tmpW, leftW, minus;
+    if(_w > 1200){
+        tmpW = _w - 375;
+        leftW = 200;
+        minus = 170;
+    }else{
+        tmpW = _w - 70;
+        leftW = 70;
+        minus = 150;
+    }
     if(!_stopCar){
-        if((pos().x() + data.X) > 0 && (pos().x() + 150 + data.X) < 740){
+        if((pos().x() + data.X) > leftW && (pos().x() + 150 + data.X) < tmpW){
             setPos(x()+data.X, y());
         }
-        if((pos().x() + data.X <= 0)){
-            setPos(0, y());
+        if((pos().x() + data.X <= leftW)){
+            setPos(leftW, y());
         }
-        if((pos().x() + 150 + data.X) >= 740){
-            setPos(740-155, y());
+        if((pos().x() + 150 + data.X) >= tmpW){
+            setPos(tmpW - minus, y());
         }
     }
 }
+
+void CarItem::resize(const int &w, const int &h)
+{
+    int tmpW = w/5.4, tmpH = h/3.62;
+    this->_w = w;
+    this->_h = h;
+    if(w > 1200){
+        tmpW = w/5.8;
+        tmpH = h/3.55;
+        setPos(w/2-250, h-350);
+    }else{
+        setPos(w/2-125, h-200);
+    }
+
+    setPixmap(_pixmap.scaled(QSize(tmpW, tmpH)));
+    update();
+}
+
+
 
 void CarItem::onStopCar()
 {

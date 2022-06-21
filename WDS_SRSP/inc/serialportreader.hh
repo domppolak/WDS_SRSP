@@ -12,7 +12,7 @@
 /*!
  * \brief Klasa SerialPortReader
  *  Klasa odpowiedzialna za obsługę połączenia z mikrokontrolerem
- *  oraz odczyt danych
+ *  oraz odczyt danych.
  */
 class SerialPortReader : public QObject
 {
@@ -33,7 +33,8 @@ public:
 
     /*!
      * \brief getPortOpened
-     * \return Zwraca wartość flagi otwarcia portu
+     * \retval true - jeśli udało się nawiązać połączenie z mikrokontrolerem
+     * \retval false - jeśli nie udało się nawiązać połącznie z mikrokotrolerem
      */
     bool getPortOpened() const { return this->_portOpened; }
     /*!
@@ -45,7 +46,7 @@ public:
     /*!
      * \brief setPortOpened
      * Ustawia flagę na wartość przekazaną w argumencie funkcji
-     * \param state - wartość do ustawienia flagi otwarcia portu
+     * \param[in] state - umożliwia ustawienie statusu nawiązanego połączenie z mikrokontrolerem
      */
     void setPortOpened(const bool &state) {this->_portOpened = state; }
 
@@ -60,7 +61,7 @@ signals:
     /*!
      * \brief newData
      * Sygnał emitowany w momencie otrzymania nowych danych z mikrokontrolera
-     * \param Data - W parametrze przechowywane są dane otrzymane z mikrokontrolera
+     * \param[out] Data - W parametrze przechowywane są dane otrzymane z mikrokontrolera
      */
     void newData(rawData Data);
     /*!
@@ -76,7 +77,7 @@ signals:
     /*!
      * \brief portError
      * Sygnał emitowany gdy następi błąd z komunikacją
-     * \param errorMessage - informacja o błędzie
+     * \param[out] errorMessage - informacja o błędzie
      */
     void portError(QString errorMessage);
     /*!
@@ -105,23 +106,23 @@ public slots:
      * Gdy danę są gotowane do odczytu ten slot jest wykonywany-
      * Odczytuje wszystkie dane z portu szeregowego i emituje je sygnałem newData(rawData)
      *
-     * \return
+     * \return zwraca 1 gdy opracja się powiedzie, a 0 gdy próba odczytu nie powiodła się
      */
     int readDataFromSerial();
     /*!
      * \brief serialErrorHandler
      * Obsługuje błędy zgłaszane przez port szeregowy
      *  i emituje je poprzez sygnał portError()
-     * \param errorMessage - błąd zgłoszony przez port szeregowy
+     * \param [in] errorMessage - błąd zgłoszony przez port szeregowy
      */
     void serialErrorHandler(QSerialPort::SerialPortError errorMessage);
 
 private:
-    QSerialPort *_serialPort = nullptr; //! Wskaźnik na port szeregowy
-    QSettings *_serialSettings; //! Wskaźnik do ustawień portu szeregowego
-    QMutex _mutex; //! Wskaźnik na mutex
+    QSerialPort *_serialPort = nullptr; //!< Wskaźnik na obiekt klasy QSerialPort
+    QSettings *_serialSettings; //!< Wskaźnik na obiekt klasy QSettings
+    QMutex _mutex; //!< Wskaźnik na obiekt klasy QMutex
 
-    bool _portOpened = false; //! Flaga sygnalizująca czy port szeregowy jesy otwarty
+    bool _portOpened = false; //!< Flaga sygnalizująca czy port szeregowy jesy otwarty
 };
 
 #endif // COMMUNICATION_HH

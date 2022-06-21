@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupSpeedSpinBox();
 
     _translator = new QTranslator();
+    ui->ObstacleCheckBox->setCheckState(Qt::Checked);
 }
 
 MainWindow::~MainWindow()
@@ -36,12 +37,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_ResetPushButton_clicked()
 {
-    _scene->resetSimulation();
-    ui->SpeedSpinBox->setValue(_scene->getCarSpeed());
-    if(_scene->getConstSpeedState()){
-        emit variableSpeed();
-        ui->SpeedCheckBox->setCheckState(Qt::Unchecked);
-    }
+    resetSimulation();
 }
 
 
@@ -88,6 +84,7 @@ void MainWindow::on_connectAction_triggered()
 void MainWindow::on_disconnectAction_triggered()
 {
     _portReader->closeSerialPort();
+    _scene->stopSimulation();
 }
 
 
@@ -95,6 +92,7 @@ void MainWindow::on_settingAction_triggered()
 {
     _sWindow->update();
     _sWindow->show();
+    _scene->stopSimulation();
 }
 
 void MainWindow::on_serial_port_opened()
@@ -109,15 +107,21 @@ void MainWindow::on_serial_port_opened()
 
 }
 
-void MainWindow::on_serial_port_closed()
-{
-    ui->mainConnectLabel->setText(tr("Brak połączenia z mikrokontrolerem"));
-    redLed();
-}
-
 void MainWindow::ErrorHandler(QString error_msg)
 {
     QMessageBox::critical(this, tr("Błąd"), error_msg);
+}
+
+void MainWindow::crashInformation()
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(tr("Kraksa"));
+    msgBox.setText(tr("Kraksa!"));
+    QPushButton *reset = msgBox.addButton(tr("Reset"), QMessageBox::ActionRole);
+    msgBox.exec();
+    if(msgBox.clickedButton() == reset){
+        resetSimulation();
+    }
 }
 
 void MainWindow::greenLed()
@@ -133,17 +137,17 @@ void MainWindow::redLed()
 void MainWindow::setupScene()
 {
     _scene = new Scene(this);
-    _scene->setSceneRect(0,0, 739, 600);
+    w = ui->graphicsView->width();
+    h = ui->graphicsView->height();
+    _scene->setSceneRect(0,0, w, h);
     _scene->setBackgroundBrush(QBrush(QRgb(0xFFDFD3)));
-    _scene->addRoad();
-    _scene->addCar();
+    _scene->addRoad(w);
+    _scene->addCar(w, h);
+    _scene->addObstacles(w, h);
 
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->fitInView(ui->graphicsView->sceneRect(), Qt::KeepAspectRatio);
     ui->graphicsView->setScene(_scene);
-
-
 }
 
 void MainWindow::setConnections()
@@ -161,7 +165,7 @@ void MainWindow::setConnections()
 
     // port closed
     connect(_portReader, SIGNAL(portClosed()),
-            this, SLOT(on_serial_port_closed()));
+            this, SLOT(on_serial_port_opened()));
 
     // errors
     connect(_portReader, SIGNAL(portError(QString)),
@@ -177,6 +181,9 @@ void MainWindow::setConnections()
 
     connect(this, SIGNAL(constSpeed()), _scene, SLOT(onConstSpeed()));
     connect(this, SIGNAL(variableSpeed()), _scene, SLOT(onVariableSpeed()));
+    connect(this, SIGNAL(obstacleON()), _scene, SLOT(onObstaclesON()));
+    connect(this, SIGNAL(obstacleOFF()), _scene, SLOT(onObstaclesOFF()));
+    connect(_scene, SIGNAL(crashInformation()), this, SLOT(crashInformation()));
 }
 
 void MainWindow::setupSpeedSpinBox()
@@ -211,6 +218,18 @@ void MainWindow::retranslate()
     _sWindow->retranslate();
 }
 
+void MainWindow::resetSimulation()
+{
+    w = ui->graphicsView->width();
+    h = ui->graphicsView->height();
+    _scene->resetSimulation(w, h);
+    ui->SpeedSpinBox->setValue(_scene->getCarSpeed());
+    if(_scene->getConstSpeedState()){
+        emit variableSpeed();
+        ui->SpeedCheckBox->setCheckState(Qt::Unchecked);
+    }
+}
+
 
 void MainWindow::on_FigurePushButton_clicked()
 {
@@ -221,6 +240,15 @@ void MainWindow::on_FigurePushButton_clicked()
 void MainWindow::on_SpeedSpinBox_valueChanged(int arg1)
 {
     _scene->setCarSpeed(arg1);
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    w = ui->graphicsView->width();
+    h = ui->graphicsView->height();
+    _scene->resizeSceneItems(w, h);
+    _scene->setSceneRect(0, 0, w, h);
+    QMainWindow::resizeEvent(event);
 }
 
 

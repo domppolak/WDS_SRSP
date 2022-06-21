@@ -9,101 +9,112 @@
         <translation>MainWindow</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="107"/>
+        <location filename="../forms/mainwindow.ui" line="114"/>
         <source>Stała prędkość</source>
         <translation>Constant speed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="114"/>
+        <location filename="../forms/mainwindow.ui" line="121"/>
         <source>Włącz przeszkody</source>
         <translation>Turn on obstacles</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="144"/>
+        <location filename="../forms/mainwindow.ui" line="151"/>
         <source>km/h</source>
         <translation>km/h</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="217"/>
+        <location filename="../forms/mainwindow.ui" line="224"/>
+        <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="236"/>
+        <location filename="../forms/mainwindow.ui" line="243"/>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="255"/>
+        <location filename="../forms/mainwindow.ui" line="262"/>
         <source>Start</source>
         <translation>Start</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="302"/>
-        <location filename="../src/mainwindow.cpp" line="106"/>
-        <location filename="../src/mainwindow.cpp" line="114"/>
+        <location filename="../forms/mainwindow.ui" line="309"/>
+        <location filename="../src/mainwindow.cpp" line="102"/>
+        <location filename="../src/mainwindow.cpp" line="110"/>
         <source>Brak połączenia z mikrokontrolerem</source>
         <translation>No connection with the microcontroller</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="346"/>
+        <location filename="../forms/mainwindow.ui" line="353"/>
         <source>Wykres</source>
         <translation>Graph</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="368"/>
+        <location filename="../forms/mainwindow.ui" line="375"/>
         <source>Połączenie</source>
         <translation>Connection</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="377"/>
-        <location filename="../src/mainwindow.cpp" line="224"/>
-        <location filename="../src/mainwindow.cpp" line="233"/>
+        <location filename="../forms/mainwindow.ui" line="384"/>
+        <location filename="../src/mainwindow.cpp" line="263"/>
+        <location filename="../src/mainwindow.cpp" line="272"/>
         <source>Język</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="387"/>
+        <location filename="../forms/mainwindow.ui" line="394"/>
         <source>Połącz</source>
         <translation>Connect</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="392"/>
+        <location filename="../forms/mainwindow.ui" line="399"/>
         <source>Rozłącz</source>
         <translation>Disconnect</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="397"/>
+        <location filename="../forms/mainwindow.ui" line="404"/>
         <source>Ustawienia</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="402"/>
+        <location filename="../forms/mainwindow.ui" line="409"/>
         <source>Polski</source>
         <translation>Polish</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="407"/>
+        <location filename="../forms/mainwindow.ui" line="414"/>
         <source>Angielski</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="103"/>
+        <location filename="../src/mainwindow.cpp" line="99"/>
         <source>Połączono z mikrokontrolerem</source>
         <translation>connected to the microcontroller</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="120"/>
+        <location filename="../src/mainwindow.cpp" line="116"/>
         <source>Błąd</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="224"/>
+        <location filename="../src/mainwindow.cpp" line="122"/>
+        <source>Kraksa</source>
+        <translation>Crash</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="123"/>
+        <source>Kraksa!</source>
+        <translation>Crash!</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="263"/>
         <source>Ustawiono język polski</source>
         <translation>Polish language was set</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="233"/>
+        <location filename="../src/mainwindow.cpp" line="272"/>
         <source>Ustawiono język angielski</source>
         <translation>English is set</translation>
     </message>
@@ -116,12 +127,17 @@
         <translation>Graph</translation>
     </message>
     <message>
-        <location filename="../src/plotwindow.cpp" line="56"/>
+        <location filename="../src/plotwindow.cpp" line="46"/>
+        <source>Osie akcelerometru</source>
+        <translation>Accelerometer axes</translation>
+    </message>
+    <message>
+        <location filename="../src/plotwindow.cpp" line="61"/>
         <source>Przyspieszenie [mg]</source>
         <translation>Accelleration [mg]</translation>
     </message>
     <message>
-        <location filename="../src/plotwindow.cpp" line="62"/>
+        <location filename="../src/plotwindow.cpp" line="67"/>
         <source>Czas [hh:mm:ss]</source>
         <translation>Time [hh:mm:ss]</translation>
     </message>

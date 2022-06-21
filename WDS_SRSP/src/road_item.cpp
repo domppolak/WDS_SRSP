@@ -1,11 +1,11 @@
 #include "road_item.hh"
 
 
-RoadItem::RoadItem()
+RoadItem::RoadItem(const int &w)
 {
     _speed = MIN_SPEED;
-    setPixmap(QPixmap(":/road/img/road/road5.png"));
-    setPos(100, -600);
+    _pixmap = QPixmap(":/road/img/road/road5.png");
+    resize(w);
     setFlag(QGraphicsItem :: ItemIsFocusable);
     setFocus();
     isVisible();
@@ -56,11 +56,21 @@ void RoadItem::stopAnimation()
 
 void RoadItem::speedChanged(moveData data)
 {
-    qDebug() << "Predkosc zmieniona: " << getSpeed();
     if( data.Y < -350){
         setSpeed(getSpeed() - 1);
     }
     if(data.Y > 350){
         setSpeed(getSpeed() + 1);
     }
+}
+
+void RoadItem::resize(const int &w)
+{
+    int tmpW = w/1.4;
+    if(w>1100){
+        tmpW = w/1.55;
+    }
+    setPos(w/2 - tmpW/2, -600);
+    setPixmap(_pixmap.scaled(QSize(tmpW, 1500)));
+    update();
 }
